@@ -30,13 +30,25 @@ angular.module('starter.controllers', [])
         $scope.ret = ElixirSrv.calc($scope.select);
         if ($scope.ret)
         {
-            var msg = 'Pieniądze będą na koncie ';
-            if ($scope.ret.nextDay)
-                msg += " jutro o ";
-            else
-                msg += " dzisiaj o ";
+            var msg = "";
+            var msg2 = "";
+            if ($scope.select.bankFrom.id == $scope.select.bankTo.id) {
+                msg = "Pieniądze pojawią się na koncie ";
+                msg2 = "w ciągu kilku minut";
+                $scope.ret.in = "";
+            } else {
+                var msg = 'Pieniądze pojawią się na koncie ';
+                
+                if ($scope.ret.nextDay)
+                    msg2 = "jutro o ";
+                else
+                    msg2 = "dzisiaj o ";
 
+                msg2 += $scope.ret.in;
+            }
+            
             $scope.ret.msg = msg;
+            $scope.ret.msgBold = msg2;
 
             $localstorage.set('bankFrom', $scope.select.bankFrom.id);
             $localstorage.set('bankTo', $scope.select.bankTo.id);
@@ -106,5 +118,9 @@ angular.module('starter.controllers', [])
 
     init();
 })
-.controller('AboutCtrl', function ($scope) { });
+.controller('AboutCtrl', function ($scope) {
+    $scope.gotoWebsite = function () {
+        window.open('http://jabiel.pl', '_system');
+    }
+});
 

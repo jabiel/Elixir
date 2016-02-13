@@ -1,6 +1,6 @@
 <ion-view view-title="Kiedy przelew">
-  <ion-content class="padding">
-      <div class="row responsive-sm">
+  <ion-content class="padding" style="background-image:url(img/paper_pattern.jpg)">
+      <div class="row responsive-md">
           <div class="col">
               <label class="item item-input item-select">
                   <div class="input-label">
@@ -21,20 +21,20 @@
       <div class="row responsive-sm">
           <div class="col" style="margin-bottom:0px;">
               <ionic-timepicker input-obj="timePickerObject">
-                  <button class="button button-block button-stable" style="margin-bottom:0px;">{{epochToTimeString(select.epoh)}}</button>
+                  <button class="button button-block button-light" style="margin-bottom:0px;">{{epochToTimeString(select.epoh)}}</button>
               </ionic-timepicker>
 
           </div>
           <div class="col" style="margin-bottom:0px;">
               <ionic-datepicker input-obj="datepickerObject">
-                  <button class="button button-block button-stable"> {{select.now | date:'yyyy-MM-dd'}}</button>
+                  <button class="button button-block button-light"> {{select.now | date:'yyyy-MM-dd'}}</button>
               </ionic-datepicker>
           </div>
       </div>
       <div class="row">
           <div class="col text-center">
               <h1>{{ret.msg}}</h1>
-              <h1><b>{{ret.in}}</b></h1>
+              <h1><b>{{ret.msgBold}}</b></h1>
           </div>
       </div>
 </ion-content>
