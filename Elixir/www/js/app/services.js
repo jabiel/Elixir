@@ -56,7 +56,6 @@ angular.module('starter.services', [])
             return banks;
         },
         calc: function (sel) {
-            console.log('sel', sel);
             if (!sel || !sel.epoh || !sel.bankFrom || !sel.bankTo)
                 return null;
 
@@ -87,13 +86,11 @@ angular.module('starter.services', [])
                 iin = sel.bankTo.ins[0];
             }
 
-            msg = "Pieni¹dze bêd¹ na koncie";
-            if (nextDay)
-                msg += " o " + iin + " nastêpnego dnia roboczego ";
-            else
-                msg += " dzisiaj o " + iin;
-
-
+            //msg = "PieniÄ…dze bÄ™dÄ… na koncie";
+            //if (nextDay)
+            //    msg += " o " + iin + " nastÄ™pnego dnia roboczego ";
+            //else
+            //    msg += " dzisiaj o " + iin;
 
             var ret = {
                 nextDay: nextDay,

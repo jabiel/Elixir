@@ -2,7 +2,6 @@
   <ion-content class="padding">
       <div class="row responsive-sm">
           <div class="col">
-              <p>żółw</p>
               <label class="item item-input item-select">
                   <div class="input-label">
                       Bank nadawcy
@@ -20,13 +19,13 @@
           </div>
       </div>
       <div class="row responsive-sm">
-          <div class="col">
+          <div class="col" style="margin-bottom:0px;">
               <ionic-timepicker input-obj="timePickerObject">
-                  <button class="button button-block button-stable">{{epochToTimeString(select.epoh)}}</button>
+                  <button class="button button-block button-stable" style="margin-bottom:0px;">{{epochToTimeString(select.epoh)}}</button>
               </ionic-timepicker>
 
           </div>
-          <div class="col">
+          <div class="col" style="margin-bottom:0px;">
               <ionic-datepicker input-obj="datepickerObject">
                   <button class="button button-block button-stable"> {{select.now | date:'yyyy-MM-dd'}}</button>
               </ionic-datepicker>
@@ -35,6 +34,7 @@
       <div class="row">
           <div class="col text-center">
               <b>{{ret.msg}}</b>
+              <h1>{{ret.in}}</h1>
           </div>
       </div>
 

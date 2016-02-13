@@ -26,6 +26,19 @@ angular.module('starter.controllers', [])
     $scope.calcElixir = function()
     {
         $scope.ret = ElixirSrv.calc($scope.select);
+        if ($scope.ret)
+        {
+            var msg = 'Pieniądze będą na koncie ';
+            if ($scope.ret.nextDay)
+                msg += " jutro o ";
+            else
+                msg += " dzisiaj o ";
+
+            $scope.ret.msg = msg;
+
+        }
+
+
     };
     
     
