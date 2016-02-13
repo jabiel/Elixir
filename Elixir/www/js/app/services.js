@@ -31,9 +31,69 @@ angular.module('starter.services', [])
         ins: ['11:30', '15:30', '17:30']
     }, {
         id: 6,
-        name: 'Idea Bank',
-        outs: ['09:30', '13:30', '16:00'],
-        ins: ['11:30', '15:30', '17:30']
+        name: 'Alior Bank',
+        outs: ['8:20', '12:20', ' 15:10'],
+        ins: ['11:00', '15:00', '17:00']
+    }, {
+        id: 7,
+        name: 'Getin Noble Bank',
+        outs: ['08:15', '13:30', '14:30'],
+        ins: ['10:00', '14:00', '17:00']
+    }, {
+        id: 8,
+        name: 'Credit Agricole',
+        outs: ['14:30'],
+        ins: ['12:00', '16:00', '18:00']
+    }, {
+        id: 9,
+        name: 'Bank Millennium',
+        outs: ['11:00', '14:30' , '17:30'],
+        ins: ['12:00', '15:30' ,'17:15']
+    }, {
+        id: 10,
+        name: 'BGŻ BNP Paribas',
+        outs: ['08:00', '11:45', '14:15'],
+        ins: ['11:00', '14:30', '17:00']
+    }, {
+        id: 11,
+        name: 'Bank Pocztowy',
+        outs: ['09:00', '13:00', '15:00'],
+        ins: ['11:00', '15:00', '17:30']
+    }, {
+        id: 12,
+        name: 'Eurobank',
+        outs: ['11:00', '15:00', '17:00'],
+        ins: ['7:30', '11:30', '14:30']
+    }, {
+        id: 13,
+        name: 'Citi Handlowy',
+        outs: ['08:00', '12:15', '15:30'],
+        ins: ['10:30', '14:30', '17:30']
+    }, {
+        id: 14,
+        name: 'Raiffeisen Polbank',
+        outs: ['08:00', '12:15', '15:00'],
+        ins: ['10:30', '14:30', '17:30']
+    }, {
+        id: 15,
+        name: 'Deutsche Bank',
+        outs: ['07:45', '12:00', '15:00'],
+        ins: ['12:00', '16:00', '17:30']
+    }, {
+        id: 16,
+        name: 'BOŚ',
+        outs: ['08:35', '12:35', '15.00'],
+        ins: ['11:00', '15:00', '17:30']
+    }, {
+        id: 17,
+        name: 'BNP Paribas Bank',
+        outs: ['08:00', '11:45', '14:15'],
+        ins: ['11:00', '14:30', '17:00']
+    }, {
+        id: 18,
+        name: 'Nordea Bank',
+        outs: ['08:30', '11:50', '14:30'],
+        ins: ['10:45', '14:45', '17:15']
     }];
 
 
@@ -112,5 +172,21 @@ angular.module('starter.services', [])
             }
             return null;
         }
-    };
-});
+    }
+})
+.factory('$localstorage', ['$window', function($window) {
+    return {
+        set: function(key, value) {
+            $window.localStorage[key] = value;
+        },
+        get: function(key, defaultValue) {
+            return $window.localStorage[key] || defaultValue;
+        },
+        setObject: function(key, value) {
+            $window.localStorage[key] = JSON.stringify(value);
+        },
+        getObject: function(key) {
+            return JSON.parse($window.localStorage[key] || '{}');
+        }
+    }
+}]);

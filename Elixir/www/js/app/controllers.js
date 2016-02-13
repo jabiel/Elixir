@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function ($scope, $filter, ElixirSrv) {
+.controller('DashCtrl', function ($scope, $filter, ElixirSrv, $localstorage) {
 
     $scope.select = {};
     $scope.ret = {};
@@ -17,9 +17,11 @@ angular.module('starter.controllers', [])
         $scope.select.now = now;
         $scope.select.epoh = h + (m * 60);
         $scope.banks = ElixirSrv.all();
-    }
 
-    init();
+        $scope.select.bankFrom = ElixirSrv.get($localstorage.get('bankFrom'));
+        $scope.select.bankTo = ElixirSrv.get($localstorage.get('bankTo'));
+        $scope.calcElixir();
+    }
 
     $scope.epochToTimeString = ElixirSrv.epochToTimeString;
 
@@ -36,13 +38,12 @@ angular.module('starter.controllers', [])
 
             $scope.ret.msg = msg;
 
+            $localstorage.set('bankFrom', $scope.select.bankFrom.id);
+            $localstorage.set('bankTo', $scope.select.bankTo.id);
         }
-
-
     };
     
     
-
     $scope.timePickerObject = {
         inputEpochTime: $scope.select.epoh, //((new Date()).getHours() * 60 * 60),  //Optional
         step: 5,  //Optional
@@ -81,15 +82,12 @@ angular.module('starter.controllers', [])
         closeButtonType: 'button-assertive',  //Optional
         inputDate: $scope.select.now,  //Optional
         mondayFirst: true,  //Optional
-        //disabledDates: disabledDates, //Optional
         weekDaysList: weekDaysList, //Optional
         monthList: monthList, //Optional
         templateType: 'popup', //Optional
         showTodayButton: 'true', //Optional
         modalHeaderColor: 'bar-positive', //Optional
         modalFooterColor: 'bar-positive', //Optional
-        //from: new Date(2012, 8, 2), //Optional
-        //to: new Date(2018, 8, 25),  //Optional
         callback: function (val) {  //Mandatory
             datePickerCallback(val);
         },
@@ -106,6 +104,7 @@ angular.module('starter.controllers', [])
         }
     };
 
+    init();
 })
 .controller('AboutCtrl', function ($scope) { });
 
