@@ -1,0 +1,26 @@
+<ion-view view-title="Fuel">
+    
+    <ion-content class="" style="background-image:url(img/paper_pattern.jpg)">
+        <div style="width:100%;height:40%" id="map"></div>
+        <div class="row responsive-md">
+            <div class="col">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Bank nadawcy
+                    </div>
+                    <select ng-model="select.bankFrom" ng-change="calcElixir()" ng-options="item as item.name for item in banks"></select>
+                </label>
+            </div>
+            <div class="col">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Bank odbiorcy
+                    </div>
+                    <select ng-model="select.bankTo" ng-change="calcElixir()" ng-options="item as item.name for item in banks"></select>
+                </label>
+            </div>
+        </div>
+      
+      
+    </ion-content>
+</ion-view>

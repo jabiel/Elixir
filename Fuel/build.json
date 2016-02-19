@@ -1,0 +1,11 @@
+{
+     "android": {
+         "release": {
+             "keystore": "d:\\src\\__android\\android-release-key.keystore",
+             "storePassword": "jarektoboss1",
+             "alias": "jabiel",
+             "password" : "jarektoboss1",
+             "keystoreType": ""
+         }
+     }
+ }
