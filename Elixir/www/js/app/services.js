@@ -94,6 +94,11 @@ angular.module('starter.services', [])
         name: 'Nordea Bank',
         outs: ['08:30', '11:50', '14:30'],
         ins: ['10:45', '14:45', '17:15']
+    }, {
+        id: 19,
+        name: 'Bank BPS',
+        outs: ['08:30', '12:00', '14:00'],
+        ins: ['11:00', '15:00', '17:00']
     }];
 
 
@@ -145,12 +150,6 @@ angular.module('starter.services', [])
                 nextDay = true;
                 iin = sel.bankTo.ins[0];
             }
-
-            //msg = "Pieniądze będą na koncie";
-            //if (nextDay)
-            //    msg += " o " + iin + " następnego dnia roboczego ";
-            //else
-            //    msg += " dzisiaj o " + iin;
 
             var ret = {
                 nextDay: nextDay,

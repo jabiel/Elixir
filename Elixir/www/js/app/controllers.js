@@ -2,7 +2,9 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function ($scope, $filter, ElixirSrv, $localstorage) {
 
-    $scope.select = {};
+    $scope.select = {
+//        now: new Date()
+    };
     $scope.ret = {};
 
     function init()
@@ -17,6 +19,8 @@ angular.module('starter.controllers', [])
         $scope.select.now = now;
         $scope.select.epoh = h + (m * 60);
         $scope.banks = ElixirSrv.all();
+        $scope.timePickerObject.inputEpochTime = $scope.select.epoh;
+        $scope.datepickerObject.inputDate = $scope.select.now;
 
         $scope.select.bankFrom = ElixirSrv.get($localstorage.get('bankFrom'));
         $scope.select.bankTo = ElixirSrv.get($localstorage.get('bankTo'));
@@ -38,13 +42,43 @@ angular.module('starter.controllers', [])
                 $scope.ret.in = "";
             } else {
                 var msg = 'Pieniądze pojawią się na koncie ';
-                
-                if ($scope.ret.nextDay)
-                    msg2 = "jutro o ";
-                else
-                    msg2 = "dzisiaj o ";
+                var d = new Date($scope.select.now);
 
-                msg2 += $scope.ret.in;
+                if (d.getDate() == $scope.select.today) {
+                    if ($scope.ret.nextDay) {
+                        d.setDate(d.getDate() + 1);
+                        if (d.getDay() == 1 || d.getDay() == 6) {
+                            var mon = d.getDate();
+                            if (d.getDay() == 1)
+                                mon++;
+                            if (d.getDay() == 6)
+                                mon += 2;
+                            msg2 = "w poniedziałek " + mon + " " + monthList[d.getMonth()].toLowerCase() + " o";
+                        }
+                        else
+                            msg2 = "jutro o ";
+                    }
+                    else
+                        msg2 = "dzisiaj o ";
+
+                } else {
+                    if ($scope.ret.nextDay)
+                        d.setDate(d.getDate() + 1);
+
+                    if (d.getDay() == 1 || d.getDay() == 6) {
+                        var mon = d.getDate();
+                        if (d.getDay() == 1)
+                            mon++;
+                        if (d.getDay() == 6)
+                            mon += 2;
+                        msg2 = "w poniedziałek " + mon + " " + monthList[d.getMonth()].toLowerCase() + " o";
+                    }
+                    else
+                        msg2 = d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o";
+
+                }
+
+                msg2 += " "+$scope.ret.in;
             }
             
             $scope.ret.msg = msg;
@@ -66,28 +100,20 @@ angular.module('starter.controllers', [])
         setButtonType: 'button-positive',  //Optional
         closeButtonType: 'button-stable',  //Optional
         callback: function (val) {    //Mandatory
-            timePickerCallback(val);
+            if (typeof (val) !== 'undefined') {
+                $scope.select.epoh = val;
+                $scope.calcElixir();
+            }
         }
     };
 
-    function timePickerCallback(val) {
-        if (typeof (val) === 'undefined') {
-            console.log('Time not selected');
-        } else {
-            $scope.select.epoh = val;
-            $scope.calcElixir();
-            //var selectedTime = new Date(new Date(val * 1000).toISOString());
-            //console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
-        }
-    }
-
     var weekDaysList = ["Nie", "Pon", "Wto", "Sro", "Czw", "Pia", "Sob"];
-    var monthList = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    var monthList = ["Sty", "Lut", "Mar", "Kwi", "Maj", "Cze", "Lip", "Sie", "Wrz", "Paź", "Lis", "Gru"];
 
     $scope.datepickerObject = {
         titleLabel: 'Title',  //Optional
         todayLabel: 'Dzisiaj',  //Optional
-        closeLabel: 'Zamknij',  //Optional
+        closeLabel: 'Anuluj',  //Optional
         setLabel: 'Set',  //Optional
         setButtonType: 'button-assertive',  //Optional
         todayButtonType: 'button-assertive',  //Optional
@@ -101,19 +127,14 @@ angular.module('starter.controllers', [])
         modalHeaderColor: 'bar-positive', //Optional
         modalFooterColor: 'bar-positive', //Optional
         callback: function (val) {  //Mandatory
-            datePickerCallback(val);
+            if (typeof (val) !== 'undefined') {
+                $scope.select.now = val;
+                //console.log('$scope.select.now', $scope.select.now);
+                $scope.calcElixir();
+            }
         },
         dateFormat: 'yyyy-MM-dd', //Optional
         closeOnSelect: false, //Optional
-    };
-
-    var datePickerCallback = function (val) {
-        if (typeof (val) === 'undefined') {
-            console.log('No date selected');
-        } else {
-            console.log('Selected date is : ', val)
-            $scope.calcElixir();
-        }
     };
 
     init();
