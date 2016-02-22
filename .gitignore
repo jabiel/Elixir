@@ -236,3 +236,6 @@ _Pvt_Extensions
 .fake/
 /Elixir/platforms/android
 /Elixir/plugins
+/Fuel/platforms/android
+/Fuel/plugins
+

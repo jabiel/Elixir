@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="com.jabiel.fuel" version="1.0.4" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="com.jabiel.fuel" version="1.0.5" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
   <name>Gdzie paliwo</name>
   <description>Fuel app</description>
   <author href="http://jabiel.pl" email="jabiel@o2.pl">Jabiel</author>
@@ -100,8 +100,9 @@
   <preference name="InAppBrowserStorageEnabled" value="True" />
   <preference name="SuppressesIncrementalRendering" value="True" />
   <plugin name="cordova-plugin-geolocation" version="2.1.0" />
-  <preference name="AndroidLaunchMode" value="standard" />
+  <preference name="AndroidLaunchMode" value="singleTop" />
   <access origin="*" />
-  
   <plugin name="cordova-plugin-whitelist" version="1.2.1" />
+  <plugin name="cordova-plugin-admobpro" version="2.11.1" src="https://github.com/floatinghotpot/cordova-admob-pro.git" />
+  <plugin name="cordova-plugin-extension" version="1.2.9" />
 </widget>
