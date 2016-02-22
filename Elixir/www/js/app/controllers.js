@@ -17,10 +17,11 @@ angular.module('starter.controllers', [])
             m++;
         
         $scope.select.now = now;
+        $scope.select.date = now;
         $scope.select.epoh = h + (m * 60);
         $scope.banks = ElixirSrv.all();
         $scope.timePickerObject.inputEpochTime = $scope.select.epoh;
-        $scope.datepickerObject.inputDate = $scope.select.now;
+        $scope.datepickerObject.inputDate = $scope.select.date;
 
         $scope.select.bankFrom = ElixirSrv.get($localstorage.get('bankFrom'));
         $scope.select.bankTo = ElixirSrv.get($localstorage.get('bankTo'));
@@ -31,56 +32,45 @@ angular.module('starter.controllers', [])
 
     $scope.calcElixir = function()
     {
-        $scope.ret = ElixirSrv.calc($scope.select);
-        if ($scope.ret)
+        var result = ElixirSrv.calc($scope.select);
+        $scope.ret = result;
+        if (result)
         {
-            var msg = "";
+            var msg = "Pieniądze pojawią się na koncie ";
             var msg2 = "";
+            
             if ($scope.select.bankFrom.id == $scope.select.bankTo.id) {
-                msg = "Pieniądze pojawią się na koncie ";
                 msg2 = "w ciągu kilku minut";
                 $scope.ret.in = "";
             } else {
-                var msg = 'Pieniądze pojawią się na koncie ';
-                var d = new Date($scope.select.now);
-
-                if (d.getDate() == $scope.select.today) {
-                    if ($scope.ret.nextDay) {
-                        d.setDate(d.getDate() + 1);
-                        if (d.getDay() == 1 || d.getDay() == 6) {
-                            var mon = d.getDate();
-                            if (d.getDay() == 1)
-                                mon++;
-                            if (d.getDay() == 6)
-                                mon += 2;
-                            msg2 = "w poniedziałek " + mon + " " + monthList[d.getMonth()].toLowerCase() + " o";
-                        }
-                        else
-                            msg2 = "jutro o ";
-                    }
-                    else
-                        msg2 = "dzisiaj o ";
-
+                var d = new Date($scope.select.date);
+                var dateIsToday = (d.getDate() == $scope.select.now.getDate());
+                if (result.nextDay)
+                    d.setDate(d.getDate() + 1);
+                console.log('d', d, dateIsToday, d.getDay());
+                // sat or sun
+                if (d.getDay() == 0 || d.getDay() == 1 || d.getDay() == 6) {
+                    var mon = d.getDate();
+                    if (d.getDay() == 0)
+                        mon++;
+                    if (d.getDay() == 6)
+                        mon += 2;
+                    msg2 = "w poniedziałek " + mon + " " + monthList[d.getMonth()].toLowerCase() + " o";
                 } else {
-                    if ($scope.ret.nextDay)
-                        d.setDate(d.getDate() + 1);
-
-                    if (d.getDay() == 1 || d.getDay() == 6) {
-                        var mon = d.getDate();
-                        if (d.getDay() == 1)
-                            mon++;
-                        if (d.getDay() == 6)
-                            mon += 2;
-                        msg2 = "w poniedziałek " + mon + " " + monthList[d.getMonth()].toLowerCase() + " o";
-                    }
-                    else
+                    if (dateIsToday) {
+                        if (result.nextDay)
+                            msg2 = "jutro o ";
+                        else 
+                            msg2 = "dzisiaj o ";
+                    } else {
                         msg2 = d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o";
+                    }
 
                 }
-
+                
                 msg2 += " "+$scope.ret.in;
-            }
-            
+            }  
+
             $scope.ret.msg = msg;
             $scope.ret.msgBold = msg2;
 
@@ -118,7 +108,7 @@ angular.module('starter.controllers', [])
         setButtonType: 'button-assertive',  //Optional
         todayButtonType: 'button-assertive',  //Optional
         closeButtonType: 'button-assertive',  //Optional
-        inputDate: $scope.select.now,  //Optional
+        inputDate: $scope.select.date,  //Optional
         mondayFirst: true,  //Optional
         weekDaysList: weekDaysList, //Optional
         monthList: monthList, //Optional
@@ -128,8 +118,7 @@ angular.module('starter.controllers', [])
         modalFooterColor: 'bar-positive', //Optional
         callback: function (val) {  //Mandatory
             if (typeof (val) !== 'undefined') {
-                $scope.select.now = val;
-                //console.log('$scope.select.now', $scope.select.now);
+                $scope.select.date = val;
                 $scope.calcElixir();
             }
         },
