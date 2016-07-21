@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="com.jabiel.elixir" version="1.0.8" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="com.jabiel.elixir" version="1.0.9" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
   <name>Kiedy Przelew</name>
   <description>Kalkulator czasu dotarcia przelewu międzybankowego</description>
   <author href="http://jabiel.pl" email="jabiel@o2.pl">Jabiel</author>

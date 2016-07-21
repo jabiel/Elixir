@@ -18,11 +18,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         //    isTesting: true, // set to true, to receiving test ad for testing purpose
         //    // autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
         //});
-        AdMob.createBanner({
-            adId: 'ca-app-pub-0757678805524137/4974429284',
-            position: AdMob.AD_POSITION.BOTTOM_CENTER,
-            autoShow: true
-        });
+        //AdMob.createBanner({
+        //    adId: 'ca-app-pub-0757678805524137/4974429284',
+        //    position: AdMob.AD_POSITION.BOTTOM_CENTER,
+        //    autoShow: true
+        //});
         
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {

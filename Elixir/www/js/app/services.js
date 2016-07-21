@@ -129,6 +129,11 @@ angular.module('starter.services', [])
         name: 'Bank SMART',
         outs: ['08:00', '12:00', '14:15'],
         ins: ['11:30', '15:30', '17:30']
+    }, {
+        id: 31,
+        name: 'T-Mobile Bank',
+        outs: ['08:20', '12:20', '15:10'],
+        ins: ['11:00', '15:00', '17:00']
     }];
 
 
