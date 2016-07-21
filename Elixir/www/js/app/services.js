@@ -81,7 +81,7 @@ angular.module('starter.services', [])
         ins: ['12:00', '16:00', '17:30']
     }, {
         id: 16,
-        name: 'BOŚ',
+        name: 'BOŚ Bank',
         outs: ['08:35', '12:35', '15.00'],
         ins: ['11:00', '15:00', '17:30']
     }, {
@@ -134,6 +134,11 @@ angular.module('starter.services', [])
         name: 'T-Mobile Bank',
         outs: ['08:20', '12:20', '15:10'],
         ins: ['11:00', '15:00', '17:00']
+    }, {
+        id: 32,
+        name: 'VW Bank',
+        outs: ['07:55', '11:45', '14:15'],
+        ins: ['12:00', '16:00', '18:00']
     }];
 
 
