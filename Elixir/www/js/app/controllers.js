@@ -43,19 +43,31 @@ angular.module('starter.controllers', [])
                 msg2 = "w ciągu kilku minut";
                 $scope.ret.in = "";
             } else {
-                var d = new Date($scope.select.date);
+                var sd = new Date($scope.select.date); // original date
+                var d = new Date($scope.select.date);  // final date (will be calculated)
                 var dateIsToday = (d.getDate() == $scope.select.now.getDate());
                 if (result.nextDay)
-                    d.setDate(d.getDate() + 1);
+                    d.setDate(sd.getDate() + 1);
                 console.log('d', d, dateIsToday, d.getDay());
+
                 // sat or sun
-                if (d.getDay() == 0 || d.getDay() == 1 || d.getDay() == 6) {
-                    var mon = d.getDate();
+                if (d.getDay() == 0 || d.getDay() == 6) {
+                    var mon = 0;
                     if (d.getDay() == 0)
+                    {
                         mon++;
+                        console.log('d is sunday');
+                    }
+
                     if (d.getDay() == 6)
+                    {
                         mon += 2;
-                    msg2 = "w poniedziałek " + mon + " " + monthList[d.getMonth()].toLowerCase() + " o";
+                        console.log('d is saturday');
+                    }
+                    
+                    d.setDate(d.getDate() + mon);
+
+                    msg2 = "w poniedziałek " + d.getDay() + " " + monthList[d.getMonth()].toLowerCase() + " o";
                 } else {
                     if (dateIsToday) {
                         if (result.nextDay)
