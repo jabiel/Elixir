@@ -66,8 +66,8 @@ angular.module('starter.controllers', [])
                     }
                     
                     d.setDate(d.getDate() + mon);
-
-                    msg2 = "w poniedziałek " + d.getDay() + " " + monthList[d.getMonth()].toLowerCase() + " o";
+                    console.log('d2', d, 'getDay()', d.getDate());
+                    msg2 = "w poniedziałek " + d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o";
                 } else {
                     if (dateIsToday) {
                         if (result.nextDay)

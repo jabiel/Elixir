@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="com.jabiel.elixir" version="1.0.11" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="com.jabiel.elixir" version="1.0.13" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
   <name>Kiedy Przelew</name>
   <description>Kalkulator czasu dotarcia przelewu międzybankowego</description>
   <author href="http://jabiel.pl" email="jabiel@o2.pl">Jabiel</author>
@@ -14,6 +14,7 @@
     <icon src="res/icons/android/icon-48-mdpi.png" density="mdpi" />
     <icon src="res/icons/android/icon-72-hdpi.png" density="hdpi" />
     <icon src="res/icons/android/icon-96-xhdpi.png" density="xhdpi" />
+    <preference name="android-minSdkVersion" value="14" />
   </platform>
   <platform name="ios">
     <!-- iOS 8.0+ -->
@@ -91,9 +92,11 @@
     <splash src="res/screens/wp8/SplashScreenImage.jpg" width="480" height="800" />
   </platform>
   <plugin name="cordova-plugin-inappbrowser" version="1.3.0" />
-  <preference name="Fullscreen" value="True" />
+  <preference name="Fullscreen" value="False" />
   <preference name="KeepRunning" value="True" />
   <preference name="ShowTitle" value="True" />
   <preference name="InAppBrowserStorageEnabled" value="True" />
   <preference name="SuppressesIncrementalRendering" value="True" />
+  <preference name="BackupWebStorage" value="none" />
+  <preference name="android-minSdkVersion" value="14" />
 </widget>

@@ -1,0 +1,41 @@
+<ion-view view-title="Kiedy przelew">
+  <ion-content class="padding" style="background-image:url(img/paper_pattern.jpg)">
+      <div class="row responsive-md" >
+          <div class="col" style="margin-bottom:0px;">
+              <label class="item item-input item-select">
+                  <div class="input-label">
+                      Bank nadawcy
+                  </div>
+                  <select ng-model="select.bankFrom" ng-change="calcElixir()" ng-options="item as item.name for item in banks"></select>
+              </label>
+          </div>
+          <div class="col" style="margin-bottom:0px;">
+              <label class="item item-input item-select">
+                  <div class="input-label">
+                      Bank odbiorcy
+                  </div>
+                  <select ng-model="select.bankTo" ng-change="calcElixir()" ng-options="item as item.name for item in banks"></select>
+              </label>
+          </div>
+      </div>
+      <div class="row responsive-sm">
+          <div class="col" style="margin-bottom:0px;">
+              <ionic-timepicker input-obj="timePickerObject">
+                  <button class="button button-block button-light" style="margin-bottom:0px;">{{epochToTimeString(select.epoh)}}</button>
+              </ionic-timepicker>
+
+          </div>
+          <div class="col" style="margin-bottom:0px;">
+              <ionic-datepicker input-obj="datepickerObject">
+                  <button class="button button-block button-light"> {{select.date | date:'yyyy-MM-dd'}}</button>
+              </ionic-datepicker>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col text-center">
+              <h2>{{ret.msg}}</h2>
+              <h2><b>{{ret.msgBold}}</b></h2>
+          </div>
+      </div>
+</ion-content>
+</ion-view>

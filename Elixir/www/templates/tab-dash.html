@@ -1,7 +1,7 @@
 <ion-view view-title="Kiedy przelew">
   <ion-content class="padding" style="background-image:url(img/paper_pattern.jpg)">
-      <div class="row responsive-md">
-          <div class="col">
+      <div class="row responsive-md" >
+          <div class="col" style="margin-bottom:0px;">
               <label class="item item-input item-select">
                   <div class="input-label">
                       Bank nadawcy
@@ -9,7 +9,7 @@
                   <select ng-model="select.bankFrom" ng-change="calcElixir()" ng-options="item as item.name for item in banks"></select>
               </label>
           </div>
-          <div class="col">
+          <div class="col" style="margin-bottom:0px;">
               <label class="item item-input item-select">
                   <div class="input-label">
                       Bank odbiorcy
@@ -33,8 +33,8 @@
       </div>
       <div class="row">
           <div class="col text-center">
-              <h1>{{ret.msg}}</h1>
-              <h1><b>{{ret.msgBold}}</b></h1>
+              <h2>{{ret.msg}}</h2>
+              <h2><b>{{ret.msgBold}}</b></h2>
           </div>
       </div>
 </ion-content>
