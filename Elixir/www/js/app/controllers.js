@@ -2,10 +2,9 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function ($scope, $filter, ElixirSrv, $localstorage) {
 
-    $scope.select = {
-//        now: new Date()
-    };
+    $scope.select = {};
     $scope.ret = {};
+    $scope.banks = [];
 
     function init()
     {
@@ -19,7 +18,7 @@ angular.module('starter.controllers', [])
         $scope.select.now = now;
         $scope.select.date = now;
         $scope.select.epoh = h + (m * 60);
-        $scope.banks = ElixirSrv.all();
+        $scope.banks = ElixirSrv.getBanks();
         $scope.timePickerObject.inputEpochTime = $scope.select.epoh;
         $scope.datepickerObject.inputDate = $scope.select.date;
 
@@ -32,63 +31,77 @@ angular.module('starter.controllers', [])
 
     $scope.calcElixir = function()
     {
-        var result = ElixirSrv.calc($scope.select);
-        $scope.ret = result;
-        if (result)
-        {
-            var msg = "Pieniądze pojawią się na koncie ";
-            var msg2 = "";
-            
-            if ($scope.select.bankFrom.id == $scope.select.bankTo.id) {
-                msg2 = "w ciągu kilku minut";
-                $scope.ret.in = "";
-            } else {
-                var sd = new Date($scope.select.date); // original date
-                var d = new Date($scope.select.date);  // final date (will be calculated)
-                var dateIsToday = (d.getDate() == $scope.select.now.getDate());
-                if (result.nextDay)
-                    d.setDate(sd.getDate() + 1);
-                console.log('d', d, dateIsToday, d.getDay());
-
-                // sat or sun
-                if (d.getDay() == 0 || d.getDay() == 6) {
-                    var mon = 0;
-                    if (d.getDay() == 0)
-                    {
-                        mon++;
-                        console.log('d is sunday');
-                    }
-
-                    if (d.getDay() == 6)
-                    {
-                        mon += 2;
-                        console.log('d is saturday');
-                    }
-                    
-                    d.setDate(d.getDate() + mon);
-                    console.log('d2', d, 'getDay()', d.getDate());
-                    msg2 = "w poniedziałek " + d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o";
-                } else {
-                    if (dateIsToday) {
-                        if (result.nextDay)
-                            msg2 = "jutro o ";
-                        else 
-                            msg2 = "dzisiaj o ";
-                    } else {
-                        msg2 = d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o";
-                    }
-
-                }
-                
-                msg2 += " "+$scope.ret.in;
-            }  
-
-            $scope.ret.msg = msg;
+        var msg2 = ElixirSrv.calcDate($scope.select);
+        if (msg2) {
+            $scope.ret.msg = "Pieniądze pojawią się na koncie ";
             $scope.ret.msgBold = msg2;
 
             $localstorage.set('bankFrom', $scope.select.bankFrom.id);
             $localstorage.set('bankTo', $scope.select.bankTo.id);
+
+        } else {
+            $scope.ret.msg = "";
+            $scope.ret.msgBold = "";
         }
+        
+
+        //var result = ElixirSrv.calc($scope.select);
+        //$scope.ret = result;
+        //if (result)
+        //{
+        //    var msg = "Pieniądze pojawią się na koncie ";
+        //    var msg2 = "";
+            
+        //    if ($scope.select.bankFrom.id == $scope.select.bankTo.id) {
+        //        msg2 = "w ciągu kilku minut";
+        //        $scope.ret.in = "";
+        //    } else {
+        //        var sd = new Date($scope.select.date); // original date
+        //        var d = new Date($scope.select.date);  // final date (will be calculated)
+        //        var dateIsToday = (d.getDate() == $scope.select.now.getDate());
+        //        if (result.nextDay)
+        //            d.setDate(sd.getDate() + 1);
+        //        console.log('d', d, dateIsToday, d.getDay());
+
+        //        // sat or sun
+        //        if (d.getDay() == 0 || d.getDay() == 6) {
+        //            var mon = 0;
+        //            if (d.getDay() == 0)
+        //            {
+        //                mon++;
+        //                console.log('d is sunday');
+        //            }
+
+        //            if (d.getDay() == 6)
+        //            {
+        //                mon += 2;
+        //                console.log('d is saturday');
+        //            }
+                    
+        //            d.setDate(d.getDate() + mon);
+        //            console.log('d2', d, 'getDay()', d.getDate());
+        //            msg2 = "w poniedziałek " + d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o";
+        //        } else {
+        //            if (dateIsToday) {
+        //                if (result.nextDay)
+        //                    msg2 = "jutro o ";
+        //                else 
+        //                    msg2 = "dzisiaj o ";
+        //            } else {
+        //                msg2 = d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o";
+        //            }
+
+        //        }
+                
+        //        msg2 += " "+$scope.ret.in;
+        //    }  
+
+        //    $scope.ret.msg = msg;
+        //    $scope.ret.msgBold = msg2;
+
+        //    $localstorage.set('bankFrom', $scope.select.bankFrom.id);
+        //    $localstorage.set('bankTo', $scope.select.bankTo.id);
+        //}
     };
     
     

@@ -141,6 +141,8 @@ angular.module('starter.services', [])
         ins: ['12:00', '16:00', '18:00']
     }];
 
+    var monthList = ["Sty", "Lut", "Mar", "Kwi", "Maj", "Cze", "Lip", "Sie", "Wrz", "Paź", "Lis", "Gru"];
+
 
     var epochToTimeString = function (ep) {
         var h = Math.floor(ep / 3600);
@@ -156,53 +158,102 @@ angular.module('starter.services', [])
         return ret;
     }
 
+    function calcBankInOutTimes(sel)
+    {
+        if (!sel || !sel.epoh || !sel.bankFrom || !sel.bankTo)
+        {
+            console.log('sel is null!');
+            return null;
+        }
+        
+        var t = epochToTimeString(sel.epoh);
+        var out = null;
+        var iin = null;
+        var nextDay = false;
+        
+        for (var i = 0; i < sel.bankFrom.outs.length; i++)
+            if (t < sel.bankFrom.outs[i]) {
+                out = sel.bankFrom.outs[i];
+                break;
+            }
+
+        if (!out) {
+            nextDay = true;
+            out = sel.bankFrom.outs[0];
+        }
+
+        for (var i = 0; i < sel.bankTo.ins.length; i++)
+            if (out < sel.bankTo.ins[i]) {
+                iin = sel.bankTo.ins[i];
+                break;
+            }
+
+        if (!iin) {
+            nextDay = true;
+            iin = sel.bankTo.ins[0];
+        }
+
+        var ret = {
+            nextDay: nextDay,
+            out: out,
+            in: iin
+        };
+        return ret;
+    }
+
+    function calcDate(sel)
+    {
+        var ret = calcBankInOutTimes(sel);
+        //console.log('ret', ret);
+
+        if (!ret)
+            return null;
+
+        if (sel.bankFrom.id == sel.bankTo.id)
+            return "w ciągu kilku minut";
+        
+        var sd = new Date(sel.date); // original date
+        var d = new Date(sel.date);  // final date (will be calculated)
+        var dateIsToday = (d.getDate() == sel.now.getDate());
+        if (ret.nextDay)
+            d.setDate(sd.getDate() + 1);
+        //console.log('d', d, 'getDay', d.getDay(), 'dateIsToday', dateIsToday);
+
+        // sat or sun
+        if (d.getDay() == 0 || d.getDay() == 6) {
+            var mon = 0;
+            if (d.getDay() == 0) {
+                d.setDate(d.getDate() + 1);
+                console.log('d is sunday');
+            }
+
+            if (d.getDay() == 6) {
+                d.setDate(d.getDate() + 2);
+                console.log('d is saturday');
+            }
+            return "w poniedziałek " + d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o " + ret.in;
+        } else {
+            var msg2 = "";
+            if (dateIsToday) {
+                if (ret.nextDay)
+                    msg2 = "jutro o ";
+                else
+                    msg2 = "dzisiaj o ";
+            } else {
+                msg2 = d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o ";
+            }
+            msg2 += ret.in;
+
+            return msg2;
+        }
+    }
+
     return {
-        all: function () {
+        getBanks: function () {
             return banks;
         },
-        calc: function (sel) {
-            if (!sel || !sel.epoh || !sel.bankFrom || !sel.bankTo)
-                return null;
-
-            var t = epochToTimeString(sel.epoh);
-            var out = null;
-            var iin = null;
-            var nextDay = false;
-            var msg = "";
-            for (var i = 0; i < sel.bankFrom.outs.length; i++)
-                if (t < sel.bankFrom.outs[i]) {
-                    out = sel.bankFrom.outs[i];
-                    break;
-                }
-
-            if (!out) {
-                nextDay = true;
-                out = sel.bankFrom.outs[0];
-            }
-
-            for (var i = 0; i < sel.bankTo.ins.length; i++)
-                if (out < sel.bankTo.ins[i]) {
-                    iin = sel.bankTo.ins[i];
-                    break;
-                }
-
-            if (!iin) {
-                nextDay = true;
-                iin = sel.bankTo.ins[0];
-            }
-
-            var ret = {
-                nextDay: nextDay,
-                out: out,
-                in: iin,
-                msg: msg
-            };
-            return ret;
-        },
+        calcDate: calcDate,
         epochToTimeString: epochToTimeString,
-        remove: function (chat) {
-            banks.splice(chats.indexOf(chat), 1);
-        },
         get: function (chatId) {
             for (var i = 0; i < banks.length; i++) {
                 if (banks[i].id === parseInt(chatId)) {
