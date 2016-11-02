@@ -1,9 +1,6 @@
 angular.module('starter.services', [])
 
 .factory('ElixirSrv', function () {
-    // Might use a resource here that returns a JSON array
-
-    // Some fake testing data
     var banks = [{
         id: 1,
         name: 'PKO BP',
@@ -46,7 +43,7 @@ angular.module('starter.services', [])
         ins: ['12:00', '16:00', '18:00']
     }, {
         id: 9,
-        name: 'Bank Millennium',
+        name: 'Millennium',
         outs: ['11:00', '14:30' , '17:30'],
         ins: ['12:00', '15:30' ,'17:15']
     }, {
@@ -56,7 +53,7 @@ angular.module('starter.services', [])
         ins: ['11:00', '14:30', '17:00']
     }, {
         id: 11,
-        name: 'Bank Pocztowy',
+        name: 'Pocztowy',
         outs: ['09:00', '13:00', '15:00'],
         ins: ['11:00', '15:00', '17:30']
     }, {
@@ -96,9 +93,9 @@ angular.module('starter.services', [])
         ins: ['10:45', '14:45', '17:15']
     }, {
         id: 19,
-        name: 'Bank BPS',
+        name: 'BPS',
         outs: ['08:30', '12:00', '14:00'],
-        ins: ['11:00', '15:00', '17:00']
+        ins: ['12:00', '16:00', '18:00']
     }, {
         id: 20,
         name: 'SGB Bank',
@@ -126,8 +123,8 @@ angular.module('starter.services', [])
         ins: ['11:00', '15:00', '17:30']
     }, {
         id: 30,
-        name: 'Bank SMART',
-        outs: ['08:00', '12:00', '14:15'],
+        name: 'Nest Bank (Smart)',
+        outs: ['08:00', '11:00', '14:00'],
         ins: ['11:30', '15:30', '17:30']
     }, {
         id: 31,
@@ -139,6 +136,26 @@ angular.module('starter.services', [])
         name: 'VW Bank',
         outs: ['07:55', '11:45', '14:15'],
         ins: ['12:00', '16:00', '18:00']
+    }, {
+        id: 33,
+        name: 'BPH',
+        outs: ['10:30', '14:30', '17:00'],
+        ins: ['11:45', '15:45', '17:00']
+    }, {
+        id: 34,
+        name: 'Biz Bank',
+        outs: ['08:00', '12:00', '14:30'],
+        ins: ['11:30', '15:30', '17:30']
+    //}, {
+    //    id: 35,
+    //    name: 'Bank BPS',
+    //    outs: ['15:00', '15:00', '15:00'],
+    //    ins: ['12:00', '16:00', '18:00']
+    }, {
+        id: 36,
+        name: 'Bank Zachodni WBK',
+        outs: ['08:15', '12:15', '14:45'],
+        ins: ['18:00', '18:00', '18:00']
     }];
 
     var monthList = ["Sty", "Lut", "Mar", "Kwi", "Maj", "Cze", "Lip", "Sie", "Wrz", "Paź", "Lis", "Gru"];
@@ -250,6 +267,12 @@ angular.module('starter.services', [])
 
     return {
         getBanks: function () {
+            banks.sort(function (a, b) {
+                var x = a.name.toLowerCase();
+                var y = b.name.toLowerCase();
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                //return a.name - b.name;
+            });
             return banks;
         },
         calcDate: calcDate,
