@@ -175,6 +175,14 @@ angular.module('starter.services', [])
         return ret;
     }
 
+    var timeStringToEpoch = function (str) {
+        var ss = str.split(":");
+        var h = parseInt(ss[0]);
+        var m = parseInt(ss[1]);
+
+        return (h * 3600) + m * 60;
+    }
+
     function calcBankInOutTimes(sel)
     {
         if (!sel || !sel.epoh || !sel.bankFrom || !sel.bankTo)
@@ -189,7 +197,7 @@ angular.module('starter.services', [])
         var nextDay = false;
         
         for (var i = 0; i < sel.bankFrom.outs.length; i++)
-            if (t < sel.bankFrom.outs[i]) {
+            if (sel.epoh < timeStringToEpoch(sel.bankFrom.outs[i])) {
                 out = sel.bankFrom.outs[i];
                 break;
             }
@@ -200,7 +208,7 @@ angular.module('starter.services', [])
         }
 
         for (var i = 0; i < sel.bankTo.ins.length; i++)
-            if (out < sel.bankTo.ins[i]) {
+            if (out < timeStringToEpoch(sel.bankTo.ins[i])) {
                 iin = sel.bankTo.ins[i];
                 break;
             }
