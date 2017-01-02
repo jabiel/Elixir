@@ -183,40 +183,40 @@ angular.module('starter.services', [])
         return (h * 3600) + m * 60;
     }
 
-    function calcBankInOutTimes(sel)
-    {
-        if (!sel || !sel.epoh || !sel.bankFrom || !sel.bankTo)
-        {
+
+    function getEarliestTransferTime(epohNow, bankTimeTable) {
+        for (var i = 0; i < bankTimeTable.length; i++) {
+            //console.log('getEarliestTransferTime: ', epohNow, bankTimeTable[i], timeStringToEpoch(bankTimeTable[i]));
+            if (epohNow < timeStringToEpoch(bankTimeTable[i])) {
+                return bankTimeTable[i];
+            }
+        }
+        //console.log('getEarliestTransferTime null');
+        return null;
+    }
+
+    function calcBankInOutTimes(sel) {
+        if (!sel || !sel.epoh || !sel.bankFrom || !sel.bankTo) {
             console.log('sel is null!');
             return null;
         }
-        
-        var t = epochToTimeString(sel.epoh);
-        var out = null;
-        var iin = null;
-        var nextDay = false;
-        
-        for (var i = 0; i < sel.bankFrom.outs.length; i++)
-            if (sel.epoh < timeStringToEpoch(sel.bankFrom.outs[i])) {
-                out = sel.bankFrom.outs[i];
-                break;
-            }
 
+        var nextDay = false;
+
+        var out = getEarliestTransferTime(sel.epoh, sel.bankFrom.outs);
         if (!out) {
             nextDay = true;
             out = sel.bankFrom.outs[0];
         }
+        var outEpoh = timeStringToEpoch(out);
 
-        for (var i = 0; i < sel.bankTo.ins.length; i++)
-            if (out < timeStringToEpoch(sel.bankTo.ins[i])) {
-                iin = sel.bankTo.ins[i];
-                break;
-            }
-
+        var iin = getEarliestTransferTime(outEpoh, sel.bankTo.ins);
         if (!iin) {
             nextDay = true;
             iin = sel.bankTo.ins[0];
         }
+
+        console.log('out: ' + out + ', in: ' + iin + ', next day: ' + nextDay);
 
         var ret = {
             nextDay: nextDay,
