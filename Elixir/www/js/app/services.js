@@ -9,8 +9,8 @@ angular.module('starter.services', [])
     }, {
         id: 2,
         name: 'PKO SA',
-        outs: ['08:30', '12:30', '15:00'],
-        ins: ['11:00', '15:00', '17:30']
+        outs: ['08:30', '10:30', '14:25'],
+        ins: ['15:00', '17:00', '20:00']
     }, {
         id: 3,
         name: 'BZ WBK',
@@ -44,7 +44,7 @@ angular.module('starter.services', [])
     }, {
         id: 9,
         name: 'Millennium',
-        outs: ['11:00', '14:30' , '17:30'],
+        outs: ['8:10', '12:10' , '14:30'],
         ins: ['12:00', '15:30' ,'17:15']
     }, {
         id: 10,
@@ -234,25 +234,25 @@ angular.module('starter.services', [])
         if (!ret)
             return null;
 
-        if (sel.bankFrom.id == sel.bankTo.id)
+        if (sel.bankFrom.id === sel.bankTo.id)
             return "w ciągu kilku minut";
         
         var sd = new Date(sel.date); // original date
         var d = new Date(sel.date);  // final date (will be calculated)
-        var dateIsToday = (d.getDate() == sel.now.getDate());
+        var dateIsToday = (d.getDate() === sel.now.getDate());
         if (ret.nextDay)
             d.setDate(sd.getDate() + 1);
         //console.log('d', d, 'getDay', d.getDay(), 'dateIsToday', dateIsToday);
 
         // sat or sun
-        if (d.getDay() == 0 || d.getDay() == 6) {
+        if (d.getDay() === 0 || d.getDay() === 6) {
             var mon = 0;
-            if (d.getDay() == 0) {
+            if (d.getDay() === 0) {
                 d.setDate(d.getDate() + 1);
                 console.log('d is sunday');
             }
 
-            if (d.getDay() == 6) {
+            if (d.getDay() === 6) {
                 d.setDate(d.getDate() + 2);
                 console.log('d is saturday');
             }
