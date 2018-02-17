@@ -12,9 +12,7 @@ describe("elixirTest", function () {
     beforeEach(inject(function (_ElixirSrv_) {
         ElixirSrv = _ElixirSrv_;
     }));
-
-
-
+    
     it("getAllBankData", function () {
         var bankData = ElixirSrv.getBanks();
 
