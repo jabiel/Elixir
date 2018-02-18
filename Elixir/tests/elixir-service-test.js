@@ -1,25 +1,29 @@
 ﻿/// uruchomienie testu tylko z konsoli: 
 /// karma start --single-run
 
-describe("elixirTest", function () {
+describe("elixirServiceTest", function () {
 
-    var ElixirSrv;
-    
+    var ElixirService;
+    var ElixirData;
     beforeEach(function () {
         module('starter.services');
+        module('starter.data');
     });
 
-    beforeEach(inject(function (_ElixirSrv_) {
-        ElixirSrv = _ElixirSrv_;
+    beforeEach(inject(function (_ElixirService_, _ElixirData_) {
+        ElixirService = _ElixirService_;
+        ElixirData = _ElixirData_;
     }));
-    
-    it("getAllBankData", function () {
-        var bankData = ElixirSrv.getBanks();
 
-        expect(bankData).toBeDefined();
-        expect(bankData.length).toBeGreaterThan(10);
+    it('ElixirData should exist', function () {
+        expect(ElixirData).toBeDefined();
     });
 
+
+    it('ElixirService should exist', function () {
+        expect(ElixirService).toBeDefined();
+    });
+   
     it("calcBankTransfer_today", function () {
         var hour = 13;
         var minute = 25;
@@ -28,13 +32,13 @@ describe("elixirTest", function () {
             epoh: (hour * 60 * 60) + (minute * 60),
             now: now,
             date: now,
-            bankFrom: ElixirSrv.get(2), // pko sa
-            bankTo: ElixirSrv.get(4) // mbank
+            bankFrom: ElixirData.getBankById(2), // pko sa
+            bankTo: ElixirData.getBankById(4) // mbank
         };
 
-        var ret = ElixirSrv.calcDate(sel);
+        var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("dzisiaj o 18:15");
+        expect(ret).toEqual("dzisiaj o 15:00");
     });
 
 
@@ -46,11 +50,11 @@ describe("elixirTest", function () {
             epoh: (hour * 60 * 60) + (minute * 60),
             now: now,
             date: now,
-            bankFrom: ElixirSrv.get(2), // pko sa
-            bankTo: ElixirSrv.get(4) // mbank
+            bankFrom: ElixirData.getBankById(2), // pko sa
+            bankTo: ElixirData.getBankById(4) // mbank
         };
 
-        var ret = ElixirSrv.calcDate(sel);
+        var ret = ElixirService.calcDate(sel);
 
         expect(ret).toEqual("jutro o 12:00");
     });
@@ -63,11 +67,11 @@ describe("elixirTest", function () {
             epoh: (hour * 60 * 60) + (minute * 60),
             now: now,
             date: now,
-            bankFrom: ElixirSrv.get(4), // mbank
-            bankTo: ElixirSrv.get(4) // mbank
+            bankFrom: ElixirData.getBankById(4), // mbank
+            bankTo: ElixirData.getBankById(4) // mbank
         };
 
-        var ret = ElixirSrv.calcDate(sel);
+        var ret = ElixirService.calcDate(sel);
 
         expect(ret).toEqual("w ciągu kilku minut");
     });
@@ -80,15 +84,15 @@ describe("elixirTest", function () {
             epoh: (hour * 60 * 60) + (minute * 60),
             now: new Date(2016, 1, 1, hour, minute, 0, 0),
             date: now,
-            bankFrom: ElixirSrv.get(2), // pko sa
-            bankTo: ElixirSrv.get(4) // mbank
+            bankFrom: ElixirData.getBankById(2), // pko sa
+            bankTo: ElixirData.getBankById(4) // mbank
         };
 
-        var ret = ElixirSrv.calcDate(sel);
+        var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("10 cze o 18:15");
+        expect(ret).toEqual("10 cze o 15:00");
     });
-
+    
     it("calcBankTransfer_end_of_month", function () {
         var hour = 16;
         var minute = 25;
@@ -97,11 +101,11 @@ describe("elixirTest", function () {
             epoh: (hour * 60 * 60) + (minute * 60),
             now: now,
             date: now,
-            bankFrom: ElixirSrv.get(2), // pko sa
-            bankTo: ElixirSrv.get(4) // mbank
+            bankFrom: ElixirData.getBankById(2), // pko sa
+            bankTo: ElixirData.getBankById(4) // mbank
         };
 
-        var ret = ElixirSrv.calcDate(sel);
+        var ret = ElixirService.calcDate(sel);
 
         expect(ret).toEqual("w poniedziałek 1 sie o 12:00");
     });
