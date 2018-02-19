@@ -38,7 +38,7 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("dzisiaj o 15:00");
+        expect(ret).toEqual("dzisiaj o 18:15");
     });
 
 
@@ -56,7 +56,7 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("jutro o 12:00");
+        expect(ret).toEqual("jutro o 11:15");
     });
 
     it("calcBankTransfer_same_bank", function () {
@@ -90,7 +90,7 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("10 cze o 15:00");
+        expect(ret).toEqual("10 cze o 18:15");
     });
     
     it("calcBankTransfer_end_of_month", function () {
@@ -107,6 +107,6 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("w poniedziałek 1 sie o 12:00");
+        expect(ret).toEqual("w poniedziałek 1 sie o 11:15");
     });
 });
