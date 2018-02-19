@@ -94,7 +94,7 @@ angular.module('starter.controllers', [/*'starter.services'*/])
 
     init();
 })
-    .controller('AboutCtrl', function ($scope, $ionicPlatform) {
+    .controller('AboutCtrl', function ($scope, $ionicPlatform, $window) {
         $ionicPlatform.ready(function () {
             cordova.getAppVersion.getVersionNumber().then(function (version) {
                 $scope.appVersion = version;
@@ -105,7 +105,10 @@ angular.module('starter.controllers', [/*'starter.services'*/])
             window.open(url, '_system');
         }
         $scope.sendMessage = function () {
-            window.open('mailto:jabiel@o2.pl?Subject=KiedyPrzelew', '_system');
+            $window.open('mailto:jabiel@o2.pl?Subject=KiedyPrzelew', '_system', 'location=yes');
+
+
+            $window.location.href = 'mailto:jabiel@o2.pl?Subject=KiedyPrzelew';
         }
         
 

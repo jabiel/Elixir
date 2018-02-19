@@ -1,9 +1,8 @@
 <ion-view view-title="O programie Kiedy Przelew">
-    <ion-content class="padding" style="background-image:url(img/paper_pattern.jpg)">
-        
+    <ion-content class="padding" style="background-image:url(img/paper_pattern.jpg)" overflow-scroll="true">
         <div class="list card ">
             <div class="item text-center">
-                <a href="javacript:" ng-click="gotoWebsite('https://jabiel.pl')">
+                <a href="#" onclick="window.open('http://jabiel.pl', '_system', 'location=yes'); return false;">
                     <img src="img/sm-logo.png" alt="logo" />
                 </a>
             </div>
@@ -21,10 +20,9 @@
                 </a>
             </div>
             <div class="item item-body text-center item-image">
-                <img src="img/opensource-wide_spaced.png" alt="OpenSource" />
-                Kod zrodlowy aplikacji jest dostepny na zasadach wolnego oprogramowania i znajduje sie 
-                <a href="javascript:" ng-click="gotoWebsite('https://github.com/jabiel/Elixir')">tutaj</a>.
-
+                <a class="item" href="#" onclick="window.open('https://github.com/jabiel/Elixir', '_system', 'location=yes'); return false;">
+                    Kod zrodlowy aplikacji jest dostepny na zasadach wolnego oprogramowania i znajduje sie tutaj
+                </a>
             </div>
 
         </div>
