@@ -35,9 +35,7 @@ To run tests:
 
 ```bash
 npm install -g karma-cli
-karma start --auto-watch 
-or 
-karma start --single-run
+npm test
 ```
 
 ## License
