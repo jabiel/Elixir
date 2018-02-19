@@ -94,9 +94,20 @@ angular.module('starter.controllers', [/*'starter.services'*/])
 
     init();
 })
-.controller('AboutCtrl', function ($scope) {
-    $scope.gotoWebsite = function () {
-        window.open('http://jabiel.pl', '_system');
-    }
-});
+    .controller('AboutCtrl', function ($scope, $ionicPlatform) {
+        $ionicPlatform.ready(function () {
+            cordova.getAppVersion.getVersionNumber().then(function (version) {
+                $scope.appVersion = version;
+            });
+        });
+
+        $scope.gotoWebsite = function (url) {
+            window.open(url, '_system');
+        }
+        $scope.sendMessage = function () {
+            window.open('mailto:jabiel@o2.pl?Subject=KiedyPrzelew', '_system');
+        }
+        
+
+    });
 

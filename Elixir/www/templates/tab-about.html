@@ -1,17 +1,35 @@
 <ion-view view-title="O programie Kiedy Przelew">
     <ion-content class="padding" style="background-image:url(img/paper_pattern.jpg)">
-        <div class="row" style="margin-top:50px;">
-            <div class="col text-center">
-                <a href="javacript:" ng-click="gotoWebsite(webUrl)">
+        
+        <div class="list card ">
+            <div class="item text-center">
+                <a href="javacript:" ng-click="gotoWebsite('https://jabiel.pl')">
                     <img src="img/sm-logo.png" alt="logo" />
-                    <br />
-                    <h1 style="color:gray">www.jabiel.pl</h1>
                 </a>
-                
             </div>
+            <div class="item item-divider">Przeslij opinie</div>
+            <div class="item item-body">
+                <p>Masz uwagi? Apka nie dziala? Daj mi znac!</p>
+                <button class="button button-outline button-block" ng-click="sendMessage()">Wyslij wiadomosc</button>
+            </div>
+            <div class="item item-divider">Informacje</div>
+            <div class="item h4">Wersja {{appVersion}}</div>
+            <div class="item item-body text-center">
+                <p>Autorem aplikacji jest Jarosaw Bielicki</p>
+                <a href="javacript:" ng-click="gotoWebsite('https://jabiel.pl')">
+                    <img src="img/sm-logo.png" alt="logo" />
+                </a>
+            </div>
+            <div class="item item-body text-center item-image">
+                <img src="img/opensource-wide_spaced.png" alt="OpenSource" />
+                Kod zrodlowy aplikacji jest dostepny na zasadach wolnego oprogramowania i znajduje sie 
+                <a href="javascript:" ng-click="gotoWebsite('https://github.com/jabiel/Elixir')">tutaj</a>.
+
+            </div>
+
         </div>
 
-
+        <!--
         <div class="list card" style="margin-top:50px;">
             <div class="item item-divider">Ostatnie aktualizacje</div>
             <div class="item item-body">
@@ -23,6 +41,8 @@
                     <li class="ion-arrow-right-b"> Poprawiony mechanizm wyliczający dzień przelewu</li>
                 </ul>
             </div>
-        </div>
+        </div>-->
+
+        
     </ion-content>
 </ion-view>
