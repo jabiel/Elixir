@@ -16,9 +16,9 @@ angular.module('starter.data', [])
             ins: ["11:00", "15:00", "17:30"]
         }, {
             id: 3,
-            name: "BZ WBK",
-            outs: ["8:15", "12:15", "14:45"],
-            ins: ["11:00", "15:00", "17:00"]
+            name: "Bank Zachodni WBK",
+            outs: ["08:15", "12:15", "14:45"],
+            ins: ["18:00", "18:00", "18:00"]
         }, {
             id: 4,
             name: "mBank", 
@@ -149,11 +149,6 @@ angular.module('starter.data', [])
             name: "Biz Bank",
             outs: ["08:30", "11:30", "14:00"],
             ins: ["11:30", "15:30", "17:30"]
-        }, {
-            id: 36,
-            name: "Bank Zachodni WBK",
-            outs: ["08:15", "12:15", "14:45"],
-            ins: ["18:00", "18:00", "18:00"]
         }];
 
         return {
