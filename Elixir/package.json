@@ -3,7 +3,7 @@
   "version": "1.2.7",
   "private": true,
   "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
+    "test": "karma start --single-run --browsers Chrome"
   },
   "devDependencies": {
     "jasmine": "^2.5.2",
