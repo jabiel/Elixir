@@ -41,6 +41,40 @@ describe("elixirServiceTest", function () {
         expect(ret).toEqual("dzisiaj o 18:15");
     });
 
+    it("calcBankTransfer_today_mbank_idea", function () {
+        var hour = 7;
+        var minute = 1;
+        var now = new Date(2018, 2, 20, hour, minute, 0, 0);
+        var sel = {
+            epoh: (hour * 60 * 60) + (minute * 60),
+            now: now,
+            date: now,
+            bankFrom: ElixirData.getBankById(4), // mbank
+            bankTo: ElixirData.getBankById(5)// idea
+        };
+
+        var ret = ElixirService.calcDate(sel);
+
+        expect(ret).toEqual("dzisiaj o 16:30");
+    });
+
+    it("calcBankTransfer_tomorrow_mbank_idea", function () {
+        var hour = 14;
+        var minute = 40;
+        var now = new Date(2018, 2, 20, hour, minute, 0, 0);
+        var sel = {
+            epoh: (hour * 60 * 60) + (minute * 60),
+            now: now,
+            date: now,
+            bankFrom: ElixirData.getBankById(4), // mbank
+            bankTo: ElixirData.getBankById(5)// idea
+        };
+
+        var ret = ElixirService.calcDate(sel);
+
+        expect(ret).toEqual("jutro o 14:30");
+    });
+
 
     it("calcBankTransfer_tomorrow", function () {
         var hour = 15;

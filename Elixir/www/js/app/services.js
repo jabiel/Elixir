@@ -4,6 +4,50 @@ angular.module('starter.services', [])
 
         var monthList = ["Sty", "Lut", "Mar", "Kwi", "Maj", "Cze", "Lip", "Sie", "Wrz", "Paź", "Lis", "Gru"];
 
+        var kir = [{ from: '9:30', to: '11:00' }, { from: '13:30', to: '15:00' }, { from: '16:00', to: '17:30' }]
+        /// Oblicza z uwzgednieniem KIR
+        var calc2 = function (sel) {
+            if (!sel || !sel.epoh || !sel.bankFrom || !sel.bankTo) {
+                console.log('sel is null!', sel);
+                return null;
+            }
+
+            console.log('  ' + sel.bankFrom.name + ' -> ' + sel.bankTo.name + ' at ' + epochToTimeString(sel.epoh));
+
+            var nextDay = false;
+            var out = getEarliestTransferTime(sel.epoh, sel.bankFrom.outs);
+            if (!out) {
+                nextDay = true;
+                out = sel.bankFrom.outs[0];
+            }
+            console.log(sel.bankFrom.name + ': out o ' + out);
+            var kirTo = null;
+            outE = timeStringToEpoch(out);
+            for (var i = 0; i < 3; i++) {
+                var kii = timeStringToEpoch(kir[i].from);
+                if (outE < kii) {
+                    kirTo = kir[i].to;
+                    break;
+                }
+            }
+            if (!kirTo) {
+                nextDay = true;
+                kirTo = kir[0].to;
+            }
+            console.log('Kir out o ' + kirTo);
+
+            var inn = getEarliestTransferTime(timeStringToEpoch(kirTo), sel.bankTo.ins);
+
+            console.log(sel.bankTo.name + ': out o ' + inn);
+
+            var ret = {
+                nextDay: nextDay,
+                out: out,
+                in: inn
+            };
+            return ret;
+        }
+
         var epochToTimeString = function (ep) {
             var h = Math.floor(ep / 3600);
             var m = (ep - (h * 3600)) / 60;
@@ -38,41 +82,40 @@ angular.module('starter.services', [])
             return null;
         }
 
-        function calcBankInOutTimes(sel) {
-            if (!sel || !sel.epoh || !sel.bankFrom || !sel.bankTo) {
-                console.log('sel is null!');
-                return null;
-            }
+        //function calcBankInOutTimes(sel) {
+        //    if (!sel || !sel.epoh || !sel.bankFrom || !sel.bankTo) {
+        //        console.log('sel is null!');
+        //        return null;
+        //    }
 
-            var nextDay = false;
+        //    var nextDay = false;
 
-            var out = getEarliestTransferTime(sel.epoh, sel.bankFrom.outs);
-            if (!out) {
-                nextDay = true;
-                out = sel.bankFrom.outs[0];
-            }
-            var outEpoh = timeStringToEpoch(out);
+        //    var out = getEarliestTransferTime(sel.epoh, sel.bankFrom.outs);
+        //    if (!out) {
+        //        nextDay = true;
+        //        out = sel.bankFrom.outs[0];
+        //    }
+        //    var outEpoh = timeStringToEpoch(out);
 
-            var iin = getEarliestTransferTime(outEpoh, sel.bankTo.ins);
-            if (!iin) {
-                nextDay = true;
-                iin = sel.bankTo.ins[0];
-            }
+        //    var iin = getEarliestTransferTime(outEpoh, sel.bankTo.ins);
+        //    if (!iin) {
+        //        nextDay = true;
+        //        iin = sel.bankTo.ins[0];
+        //    }
 
-            console.log('out: ' + out + ', in: ' + iin + ', next day: ' + nextDay);
+        //    console.log('out: ' + out + ', in: ' + iin + ', next day: ' + nextDay);
 
-            var ret = {
-                nextDay: nextDay,
-                out: out,
-                in: iin
-            };
-            return ret;
-        }
+        //    var ret = {
+        //        nextDay: nextDay,
+        //        out: out,
+        //        in: iin
+        //    };
+        //    return ret;
+        //}
 
         function calcDate(sel)
         {
-            var ret = calcBankInOutTimes(sel);
-            //console.log('ret', ret);
+            var ret = calc2(sel);
 
             if (!ret)
                 return null;
@@ -99,7 +142,7 @@ angular.module('starter.services', [])
                     d.setDate(d.getDate() + 2);
                     console.log('d is saturday');
                 }
-                return "w poniedziałek " + d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o " + ret.in;
+                return { date: d, msg: "w poniedziałek " + d.getDate() + " " + monthList[d.getMonth()].toLowerCase() + " o " + ret.in};
             } else {
                 var msg2 = "";
                 if (dateIsToday) {
@@ -112,7 +155,7 @@ angular.module('starter.services', [])
                 }
                 msg2 += ret.in;
 
-                return msg2;
+                return { date: d, msg: msg2};
             }
         }
 

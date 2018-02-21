@@ -35,6 +35,10 @@
           <div class="col text-center">
               <h2>{{ret.msg}}</h2>
               <h2><b>{{ret.msgBold}}</b></h2>
+
+          </div>
+          <div ng-if="ret.msgBold">
+              <a href="#" ng-click="setReminder()">Ustaw przypomnienie</a>
           </div>
       </div>
 </ion-content>
