@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [/*'starter.services'*/])
 
-    .controller('DashCtrl', function ($scope, $filter, ElixirData, ElixirService, $localstorage, $ionicPlatform) {
+    .controller('DashCtrl', function ($scope, $filter, ElixirData, ElixirService, $localstorage, $ionicPlatform, $ionicPopup) {
 
     $scope.select = {};
     $scope.ret = {};
@@ -25,6 +25,43 @@ angular.module('starter.controllers', [/*'starter.services'*/])
         $scope.select.bankFrom = ElixirData.getBankById($localstorage.get('bankFrom'));
         $scope.select.bankTo = ElixirData.getBankById($localstorage.get('bankTo'));
         $scope.calcElixir();
+    }
+
+    $scope.setReminder = function () {
+        $ionicPopup.show({
+            title: 'Ustawic powiadomienie na ' + $scope.ret.msgBold,
+            scope: $scope,
+            buttons: [
+                { text: 'Nie', onTap: function (e) { return true; } },
+                {
+                    text: '<b>Tak</b>',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        cordova.plugins.notification.local.schedule({
+                            title: 'Kiedy Przelew przypomina',
+                            text: 'Pieniadze powinny byc na koncie w ' + $scope.select.bankTo.name,
+                            foreground: true,
+                            trigger: { at: $scope.ret.date }
+                        });
+                        return true;
+                    }
+                },
+            ]
+        }).then(function (res) {
+            console.log('Tapped!', res);
+        }, function (err) {
+            console.log('Err:', err);
+        }, function (msg) {
+            console.log('message:', msg);
+        });
+
+        //cordova.plugins.notification.local.schedule({
+        //    title: 'My first notification',
+        //    text: 'Thats pretty easy...',
+        //    foreground: true
+        //});
+
+
     }
 
     $scope.epochToTimeString = ElixirService.epochToTimeString;
@@ -94,20 +131,7 @@ angular.module('starter.controllers', [/*'starter.services'*/])
         closeOnSelect: false, //Optional
     };
 
-    $scope.setReminder = function () {
-        cordova.plugins.notification.local.schedule({
-            title: 'My first notification',
-            text: 'Thats pretty easy...',
-            foreground: true
-        });
-
-        cordova.plugins.notification.local.schedule({
-            title: 'Kiedy Przelew przypomina',
-            text: 'Pieniadze powinny byc na koncie w ' + $scope.select.bankTo.name,
-            foreground: true,
-            trigger: { at: $scope.ret.date }
-        });
-    }
+    
 
     init();
     $ionicPlatform.ready(function () {
