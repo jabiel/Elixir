@@ -120,9 +120,11 @@ angular.module('starter.services', [])
             if (!ret)
                 return null;
 
-            if (sel.bankFrom.id === sel.bankTo.id)
-                return "w ciągu kilku minut";
-
+            if (sel.bankFrom.id === sel.bankTo.id) {
+                var d = new Date(new Date(sel.date).getTime() + 5 * 60000); // 5 minut
+                return { date: d, msg: "w ciągu kilku minut" };
+            }
+            
             var sd = new Date(sel.date); // original date
             var d = new Date(sel.date);  // final date (will be calculated)
             var dateIsToday = (d.getDate() === sel.now.getDate());

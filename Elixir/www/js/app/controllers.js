@@ -151,10 +151,10 @@ angular.module('starter.controllers', [/*'starter.services'*/])
             window.open(url, '_system');
         }
         $scope.sendMessage = function () {
-            $window.open('mailto:jabiel@o2.pl?Subject=KiedyPrzelew', '_system', 'location=yes');
+            $window.open('mailto:jabiel@o2.pl?subject=KiedyPrzelew', '_system', 'location=yes');
 
 
-            $window.location.href = 'mailto:jabiel@o2.pl?Subject=KiedyPrzelew';
+            //$window.location.href = 'mailto:jabiel@o2.pl?Subject=KiedyPrzelew';
         }
         
 
