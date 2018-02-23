@@ -27,42 +27,34 @@ angular.module('starter.controllers', [/*'starter.services'*/])
         $scope.calcElixir();
     }
 
-    $scope.setReminder = function () {
-        $ionicPopup.show({
-            title: 'Ustawic powiadomienie na ' + $scope.ret.msgBold,
-            scope: $scope,
-            buttons: [
-                { text: 'Nie', onTap: function (e) { return true; } },
-                {
-                    text: '<b>Tak</b>',
-                    type: 'button-positive',
-                    onTap: function (e) {
-                        cordova.plugins.notification.local.schedule({
-                            title: 'Kiedy Przelew przypomina',
-                            text: 'Pieniadze powinny byc na koncie w ' + $scope.select.bankTo.name,
-                            foreground: true,
-                            trigger: { at: $scope.ret.date }
-                        });
-                        return true;
-                    }
-                },
-            ]
-        }).then(function (res) {
-            console.log('Tapped!', res);
-        }, function (err) {
-            console.log('Err:', err);
-        }, function (msg) {
-            console.log('message:', msg);
-        });
-
-        //cordova.plugins.notification.local.schedule({
-        //    title: 'My first notification',
-        //    text: 'Thats pretty easy...',
-        //    foreground: true
-        //});
-
-
-    }
+    //$scope.setReminder = function () {
+    //    $ionicPopup.show({
+    //        title: 'Ustawic powiadomienie na ' + $scope.ret.msgBold,
+    //        scope: $scope,
+    //        buttons: [
+    //            { text: 'Nie', onTap: function (e) { return true; } },
+    //            {
+    //                text: '<b>Tak</b>',
+    //                type: 'button-positive',
+    //                onTap: function (e) {
+    //                    cordova.plugins.notification.local.schedule({
+    //                        title: 'Kiedy Przelew przypomina',
+    //                        text: 'Pieniadze powinny byc na koncie w ' + $scope.select.bankTo.name,
+    //                        foreground: true,
+    //                        trigger: { at: $scope.ret.date }
+    //                    });
+    //                    return true;
+    //                }
+    //            },
+    //        ]
+    //    }).then(function (res) {
+    //        console.log('Tapped!', res);
+    //    }, function (err) {
+    //        console.log('Err:', err);
+    //    }, function (msg) {
+    //        console.log('message:', msg);
+    //    });
+    //}
 
     $scope.epochToTimeString = ElixirService.epochToTimeString;
 
