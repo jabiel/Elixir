@@ -34,11 +34,14 @@ angular.module('starter.services', [])
                 nextDay = true;
                 kirTo = kir[0].to;
             }
-            console.log('Kir out o ' + kirTo);
+            //console.log('Kir out o ' + kirTo);
 
             var inn = getEarliestTransferTime(timeStringToEpoch(kirTo), sel.bankTo.ins);
-
-            console.log(sel.bankTo.name + ': out o ' + inn);
+            if (!inn) {
+                nextDay = true;
+                inn = sel.bankTo.ins[0];
+            }
+            //console.log(sel.bankTo.name + ': out o ' + inn);
 
             var ret = {
                 nextDay: nextDay,

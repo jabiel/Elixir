@@ -38,7 +38,24 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("dzisiaj o 18:15");
+        expect(ret.msg).toEqual("dzisiaj o 18:15");
+    });
+
+    it("calc_alior_idea", function () {
+        var hour = 13;
+        var minute = 25;
+        var now = new Date(2018, 2, 2, hour, minute, 0, 0);
+        var sel = {
+            epoh: (hour * 60 * 60) + (minute * 60),
+            now: now,
+            date: now,
+            bankFrom: ElixirData.getBankById(6), // alior
+            bankTo: ElixirData.getBankById(5) // idea
+        };
+
+        var ret = ElixirService.calcDate(sel);
+
+        expect(ret.msg).toEqual("jutro o 10:30");
     });
 
     it("calcBankTransfer_today_mbank_idea", function () {
@@ -55,7 +72,7 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("dzisiaj o 16:30");
+        expect(ret.msg).toEqual("dzisiaj o 16:30");
     });
 
     it("calcBankTransfer_tomorrow_mbank_idea", function () {
@@ -72,7 +89,7 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("jutro o 14:30");
+        expect(ret.msg).toEqual("jutro o 14:30");
     });
 
 
@@ -90,7 +107,7 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("jutro o 11:15");
+        expect(ret.msg).toEqual("jutro o 11:15");
     });
 
     it("calcBankTransfer_same_bank", function () {
@@ -107,7 +124,7 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("w ciągu kilku minut");
+        expect(ret.msg).toEqual("w ciągu kilku minut");
     });
 
     it("calcBankTransfer_setdate", function () {
@@ -124,7 +141,7 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("10 cze o 18:15");
+        expect(ret.msg).toEqual("10 cze o 18:15");
     });
     
     it("calcBankTransfer_end_of_month", function () {
@@ -141,6 +158,6 @@ describe("elixirServiceTest", function () {
 
         var ret = ElixirService.calcDate(sel);
 
-        expect(ret).toEqual("w poniedziałek 1 sie o 11:15");
+        expect(ret.msg).toEqual("w poniedziałek 1 sie o 11:15");
     });
 });
