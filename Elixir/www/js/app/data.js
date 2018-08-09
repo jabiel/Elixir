@@ -11,7 +11,7 @@ angular.module('starter.data', [])
             ins: ["11:30", "15:10", "17:30"]
         }, {
             id: 2,
-            name: "PKO SA",
+            name: "Pekao SA",
             outs: ["08:30", "12:30", "15:00"],
             ins: ["11:00", "15:00", "17:30"]
         }, {
