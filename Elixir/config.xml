@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget defaultlocale="en-US" id="com.jabiel.elixir" version="10.2.25" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
+<widget defaultlocale="en-US" id="com.jabiel.elixir" version="10.2.26" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
   <name>Kiedy Przelew</name>
   <description>Kalkulator czasu dotarcia przelewu miedzybankowego</description>
   <author email="jabiel@o2.pl" href="http://jabiel.pl">Jabiel</author>
@@ -87,7 +87,7 @@
   <preference name="SuppressesIncrementalRendering" value="True" />
   <preference name="BackupWebStorage" value="none" />
   <preference name="android-minSdkVersion" value="16" />
-  <engine name="browser" spec="^5.0.3" />
+  <engine name="browser" spec="^5.0.4" />
   <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
   <plugin name="cordova-plugin-apprate" spec="^1.3.0" />
   <plugin name="cordova-plugin-globalization" spec="^1.0.9" />
@@ -95,5 +95,5 @@
   <plugin name="cordova-plugin-device" spec="~2.0.1" />
   <plugin name="cordova-plugin-badge" spec="~0.8.7" />
   <plugin name="cordova-plugin-dialogs" spec="~1.3.0" />
-  <engine name="android" spec="5.2.1" />
+  <engine name="android" spec="7.1.1" />
 </widget>
