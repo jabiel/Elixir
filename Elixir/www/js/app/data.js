@@ -184,6 +184,11 @@ angular.module('starter.data', [])
             name: "Noble Bank",
             outs: ["08:15", "12:15", "14:30"],
             ins: ["10:00", "14:00", "17:00"]
+        }, {
+            id: 42,
+            name: "neoBank",
+            outs: ["08:30", "12:30", "14:30"],
+            ins: ["12:00", "15:00", "17:40"]
         }];
 
         return {
