@@ -19,7 +19,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             //blackberry: 'appworld://content/[App Id]/',
             //windows8: 'ms-windows-store:Review?name=<the Package Family Name of the application>'
         };
-        AppRate.preferences.usesUntilPrompt = 4;
+        AppRate.preferences.usesUntilPrompt = 3;
 
         AppRate.promptForRating(false);
     });

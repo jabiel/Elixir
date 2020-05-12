@@ -68,7 +68,12 @@ angular.module('starter.controllers', [/*'starter.services'*/])
 
             $localstorage.set('bankFrom', $scope.select.bankFrom.id);
             $localstorage.set('bankTo', $scope.select.bankTo.id);
-
+            try {
+                AppCenter.Analytics.trackEvent("calcElixir");
+            } catch (error) {
+                //alert("start: " + error.message);                
+            }
+    
         } else {
             $scope.ret.msg = "";
             $scope.ret.msgBold = "";
@@ -134,6 +139,7 @@ angular.module('starter.controllers', [/*'starter.services'*/])
 })
     .controller('AboutCtrl', function ($scope, $ionicPlatform, $window) {
         $ionicPlatform.ready(function () {
+            
             cordova.getAppVersion.getVersionNumber().then(function (version) {
                 $scope.appVersion = version;
             });

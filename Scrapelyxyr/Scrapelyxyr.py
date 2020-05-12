@@ -59,8 +59,12 @@ for idx, val in enumerate(local):
     
     mobj = findByName(moneypl, lname)
     if(mobj):
-        print(lname + ' ' + str(val['outs'])  + ' '  +str(val['ins']) )
-        print(mobj['name'] + ' ' + str(mobj['outs'])  + ' '  +str(mobj['ins']) )
+        if str(val['outs']) != str(mobj['outs']) or str(val['ins']) != str(mobj['ins']):
+            print('            id: '+str(val['id']) + ',')
+            print('            name: "' + lname + '",')
+            print('            outs: ' + str(mobj['outs']) + ' // old: ' + str(val['outs']))
+            print('            ins:'  +str(mobj['ins']) + ' // old: ' + str(val['ins']))
+        # print(mobj['name'] + ' ' + str(mobj['outs'])  + ' '  +str(mobj['ins']) )
     else:
         print('brak ' + lname)
     print('')

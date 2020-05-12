@@ -6,7 +6,7 @@ angular.module('starter.data', [])
     .factory('ElixirData', function () {
         var banks = [{
             id: 1,
-            name: "PKO BP",
+            name: "PKO Bank Polski",
             outs: ["08:00", "11:45", "14:30"],
             ins: ["11:30", "15:10", "17:30"]
         }, {
@@ -16,9 +16,9 @@ angular.module('starter.data', [])
             ins: ["11:00", "15:00", "17:30"]
         }, {
             id: 3,
-            name: "Bank Zachodni WBK",
+            name: "Santander Bank Polska",
             outs: ["08:15", "12:15", "14:45"],
-            ins: ["18:00", "18:00", "18:00"]
+            ins: ["11:00", "15:00", "18:00"]
         }, {
             id: 4,
             name: "mBank", 
@@ -27,8 +27,8 @@ angular.module('starter.data', [])
         }, {
             id: 5,
             name: "Idea Bank",
-            outs: ["07:30", "12:15", "15:00"],
-            ins: ["10:30", "14:30", "16:30"]
+            outs: ['9:30', '13:30', '16:00'],
+            ins:['10:30', '14:30', '16:30']
         }, {
             id: 6,
             name: "Alior Bank",
@@ -50,20 +50,10 @@ angular.module('starter.data', [])
             outs: ["8:10", "12:10", "14:30"],
             ins: ["12:00", "15:30", "17:15"]
         }, {
-            id: 10,
-            name: "BGŻ BNP Paribas",
-            outs: ["08:00", "11:45", "14:15"],
-            ins: ["12:00", "15:00", "18:00"]
-        }, {
             id: 11,
             name: "Pocztowy",
             outs: ["09:00", "13:00", "15:00"],
             ins: ["11:00", "15:00", "17:30"]
-        }, {
-            id: 12,
-            name: "Eurobank",
-            outs: ["7:30", "11:30", "14:30"],
-            ins: ["11:00", "15:00", "17:00"]
         }, {
             id: 13,
             name: "Citi Handlowy",
@@ -88,7 +78,7 @@ angular.module('starter.data', [])
             id: 17,
             name: "BNP Paribas Bank",
             outs: ["08:00", "11:45", "14:15"],
-            ins: ["11:00", "14:30", "17:00"]
+            ins: ["12:00", "15:00", "17:00"]
         }, {
             id: 18,
             name: "Nordea Bank",
@@ -102,7 +92,7 @@ angular.module('starter.data', [])
         }, {
             id: 20,
             name: "SGB Bank",
-            outs: ["08:30", "12:30", "15:30"],
+            outs: ["08:00", "12:30", "15:30"],
             ins: ["11:30", "15:30", "17:30"]
         }, {
             id: 22,
@@ -126,7 +116,7 @@ angular.module('starter.data', [])
             ins: ["10:30", "14:30", "16:30"]
         }, {
             id: 30,
-            name: "Nest Bank (Smart)",
+            name: "Nest Bank",
             outs: ["08:00", "11:30", "14:00"],
             ins: ["11:30", "15:30", "17:30"]
         }, {
@@ -157,7 +147,7 @@ angular.module('starter.data', [])
         }, {
             id: 36,
             name: "DNB Bank",
-            outs: ["08:30", "12:30", "15:00"],
+            outs: ['08:00', '12:00', '14:30'],
             ins: ["11:00", "15:00", "17:30"]
         }, {
             id: 37,
@@ -166,19 +156,19 @@ angular.module('starter.data', [])
             ins: ["10:00", "14:00", "16:00"]
         }, {
             id: 38,
-            name: "Santander Consumer Bank",
-            outs: ["09:00", "13:30", "16:00"],
-            ins: ["11:00", "15:00", "17:00"]
+            name: "Santander Bank Polska",
+            outs: ["8:15", "12:15", "14:45"],
+            ins: ["11:00", "15:00", "18:00"]
         }, {
-            id: 39,
-            name: "Kasa Stefczyka",
-            outs: ["06:00", "08:30", "12:30"],
-            ins: ["11:00", "15:00", "17:30"]
+            id: 39, // https://www.kasastefczyka.pl/poradnik/konta-i-karty/w-jakich-godzinach-realizowane-sa-sesje-przychodzace-i-wychodzace
+            name: "Kasa Stefczyka", 
+            outs: ["07:15", "11:15", "13:45"],
+            ins: ["13:00", "16:30", "18:00"]
         }, {
             id: 40,
             name: "Pekao Bank Hipoteczny",
             outs: ["08:30", "10:30", "13:30"],
-            ins: ["11:30", "15:00", "17:30"]
+            ins: ["15:00", "17:00", "20:00"]
         }, {
             id: 41,
             name: "Noble Bank",
@@ -188,7 +178,7 @@ angular.module('starter.data', [])
             id: 42,
             name: "neoBank",
             outs: ["08:30", "12:30", "14:30"],
-            ins: ["12:00", "15:00", "17:40"]
+            ins: ["12:00", "14:00", "17:40"]
         }];
 
         return {
