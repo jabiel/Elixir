@@ -1,4 +1,6 @@
+<!---
 [![Build Status](https://travis-ci.org/jabiel/Elixir.svg?branch=master)](https://travis-ci.org/jabiel/Elixir)
+-->
 
 # Elixir
 Simple Cordva/Ionic application build using Visual Studio
