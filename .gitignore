@@ -237,6 +237,8 @@ _Pvt_Extensions
 /Elixir/platforms/android
 /Elixir/plugins
 /Elixir/build.json
+/Elixir/build_release.cmd
+/Elixir/build_release_bundle.cmd
 /Fuel/
 /LICENSE.7z
 /Res
